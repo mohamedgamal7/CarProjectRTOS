@@ -1,5 +1,4 @@
 // Include necessary TivaWare and FreeRTOS headers
-//
 #include <stdint.h>
 #include <stdbool.h>
 #include "inc/hw_memmap.h"
@@ -19,8 +18,12 @@
 #include "HAL/LCD/LCD_interface.h"
 #include "HAL/TEMPSENSOR/TempSensor.h"
 #include "APP/APP.h"
-//#include "SERVICE/Scheduler.h"
 
+#include "APP/Buttons/Buttons.h"
+
+car_state currunt_state = free_running;
+dirType LDR_reading;
+int32  Reading_differece = 0 ;
 
 void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
 {

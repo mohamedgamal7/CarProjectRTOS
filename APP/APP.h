@@ -19,9 +19,10 @@
 
 #define LDR_PERIOD              100
 #define LCD_PERIOD              200
-#define TEMP_READ               300
 #define ULTRASONIC_PERIOD       60
 #define BUTTON_CHECK_PERIOD     80
+
+#define ENGINE_POWER    70
 
 typedef enum
 {
@@ -35,7 +36,6 @@ typedef enum
 void ldr_swing_car(void);
 void lcd_display(void);
 void avoid_obstacles(void);
-void button_check(void);
 
 void lcd_display_const_string(void);
 
