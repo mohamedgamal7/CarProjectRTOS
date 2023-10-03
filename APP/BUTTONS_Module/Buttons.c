@@ -2,12 +2,12 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
-#include "semphr.h"
+#include "queue.h"
 
 #include "MCAL/DIO/DIO.h"
 #include "HAL/MOTOR/Motor.h"
 #include "HAL/LDR/LDR.h"
-
+#include "APP/APP_Config.h"
 #include "APP/BUTTONS_Module/Buttons.h"
 
 extern QueueHandle_t MBXstart_tick;

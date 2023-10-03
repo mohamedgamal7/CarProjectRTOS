@@ -4,12 +4,19 @@
  *  Created on: Oct 1, 2023
  *      Author: ERoshdy
  */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "queue.h"
+
+#include "HAL/ULTRASONIC/ULTRASONIC_interface.h"
+#include "HAL/MOTOR/Motor.h"
+
+#include "APP/APP_Config.h"
 #include "APP/Ultrasonic_Module/Ultrasonic_Module.h"
 
-extern dirType LDR_reading;
-//extern car_state current_state;
-extern int32  Reading_differece;
+
 extern QueueHandle_t MBXcurrunt_state;
+
 
 void avoid_obstacles(void)
 {
@@ -73,7 +80,6 @@ void avoid_obstacles(void)
             }
 
             vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(ULTRASONIC_PERIOD));
-//        vTaskDelay(pdMS_TO_TICKS(ULTRASONIC_PERIOD));
     }
 }
 

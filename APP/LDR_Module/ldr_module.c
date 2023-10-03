@@ -5,14 +5,14 @@
  *      Author: eme
  */
 
-#include <APP/APP_Config.h>
 #include "FreeRTOS.h"
 #include "task.h"
-#include "semphr.h"
+#include "queue.h"
 
-#include "MCAL/DIO/DIO.h"
 #include "HAL/LDR/LDR.h"
-#include "../HAL/MOTOR/Motor.h"
+#include "HAL/MOTOR/Motor.h"
+
+#include "APP/APP_Config.h"
 #include "APP/LDR_Module/ldr_module.h"
 
 extern QueueHandle_t MBXcurrunt_state;
@@ -20,9 +20,6 @@ extern QueueHandle_t MBXLDR_reading;
 extern QueueHandle_t MBXReading_differece;
 
 
-//extern car_state currunt_state;
-//extern dirType LDR_reading;
-//extern int32  Reading_differece;
 
 void ldr_swing_car(void)
 {
@@ -61,7 +58,6 @@ void ldr_swing_car(void)
                     }
                 }
             }
-
             vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(LDR_PERIOD));
 //        vTaskDelay(pdMS_TO_TICKS(LDR_PERIOD));
     }

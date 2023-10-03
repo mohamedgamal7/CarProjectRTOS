@@ -5,25 +5,23 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
-#include "semphr.h"
+#include "queue.h"
 
 
 #include "MCAL/DIO/DIO.h"
 #include "HAL/LCD/LCD_interface.h"
 #include "HAL/LDR/LDR.h"
+#include "APP/APP_Config.h"
 #include "APP/DISPLAY_Module/display.h"
 
 
-/* extern global variables */
-extern dirType LDR_reading;
-extern int32  Reading_differece;
-//extern uint8_t temperature_reading ;
-//extern uint32_t start_tick;
 extern QueueHandle_t MBXstart_tick;
 extern QueueHandle_t MBXtemperature_reading ;
 extern QueueHandle_t MBXcurrunt_state;
 extern QueueHandle_t MBXLDR_reading;
 extern QueueHandle_t MBXReading_differece;
+
+
 
 
 void lcd_display_const_string(void)
@@ -35,8 +33,8 @@ void lcd_display_const_string(void)
 
 void lcd_display(void)
 {
+
     TickType_t xLastWakeTime = xTaskGetTickCount();
-    xLastWakeTime = xTaskGetTickCount();
 
     lcd_display_const_string();
     uint32_t start_count;
@@ -50,6 +48,7 @@ void lcd_display(void)
     while(1)
     {
 
+            xLastWakeTime = xTaskGetTickCount();
             xQueuePeek( MBXstart_tick, &start_count, 0);
             xQueuePeek( MBXcurrunt_state, &current_state, 0);
             xQueuePeek( MBXtemperature_reading, &temperature_reading, 0);

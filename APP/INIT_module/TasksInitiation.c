@@ -6,18 +6,12 @@
  */
 /* This file is made for the Initialization of the needed modules */
 
-#include <stdint.h>
-#include <stdbool.h>
-#include "inc/hw_memmap.h"
-#include "inc/hw_types.h"
-#include "driverlib/gpio.h"
-#include "driverlib/sysctl.h"
+
 
 #include "FreeRTOS.h"
 #include "task.h"
-#include "semphr.h"
+#include "queue.h"
 
-#include "LIB/Delay.h"
 #include "MCAL/DIO/DIO.h"
 #include "HAL/ULTRASONIC/ULTRASONIC_interface.h"
 #include "HAL/MOTOR/Motor.h"

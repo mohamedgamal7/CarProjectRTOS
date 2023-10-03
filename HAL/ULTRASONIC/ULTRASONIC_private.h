@@ -7,7 +7,7 @@
 #ifndef _ULTRASONIC_PRIVATE_H
 #define _ULTRASONIC_PRIVATE_H
 
-#define TIMEOUT_DURATION_TICKS    5*3180  /* represent 0.5 millisecond time out */
+#define TIMEOUT_DURATION_TICKS    5*3180  /* represent 5 millisecond time out */
 
 static void Ultrasonic_GPIO_Init(void);
 static void Ultrasonic_Timer_Init(void);
