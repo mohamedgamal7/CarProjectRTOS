@@ -13,11 +13,12 @@ extern QueueHandle_t MBXcurrunt_state;
 
 void avoid_obstacles(void)
 {
+    TickType_t xLastWakeTime = xTaskGetTickCount();
     float distance = -1;
     car_state current_state;
     while(1)
     {
-
+            xLastWakeTime = xTaskGetTickCount();
 //            static uint8 turnning_counter = 35;
 //            static uint8 block_counter = 100;
             xQueuePeek( MBXcurrunt_state, &current_state, 0);
@@ -71,7 +72,8 @@ void avoid_obstacles(void)
                 }
             }
 
-        vTaskDelay(pdMS_TO_TICKS(ULTRASONIC_PERIOD));
+            vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(ULTRASONIC_PERIOD));
+//        vTaskDelay(pdMS_TO_TICKS(ULTRASONIC_PERIOD));
     }
 }
 

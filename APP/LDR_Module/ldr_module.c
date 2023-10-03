@@ -25,13 +25,16 @@ extern QueueHandle_t MBXReading_differece;
 //extern int32  Reading_differece;
 
 void ldr_swing_car(void)
+{
 
-{   car_state current_state;
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+    car_state current_state;
     dirType LDR_direction;
     int32_t  Reading_differece;
 
     while(1)
-    {
+    {        xLastWakeTime = xTaskGetTickCount();
+
             xQueuePeek( MBXcurrunt_state, &current_state, 0);
             if(current_state == free_running)
             {
@@ -59,7 +62,8 @@ void ldr_swing_car(void)
                 }
             }
 
-        vTaskDelay(pdMS_TO_TICKS(LDR_PERIOD));
+            vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(LDR_PERIOD));
+//        vTaskDelay(pdMS_TO_TICKS(LDR_PERIOD));
     }
 }
 

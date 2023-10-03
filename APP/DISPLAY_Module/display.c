@@ -35,6 +35,9 @@ void lcd_display_const_string(void)
 
 void lcd_display(void)
 {
+    TickType_t xLastWakeTime = xTaskGetTickCount();
+    xLastWakeTime = xTaskGetTickCount();
+
     lcd_display_const_string();
     uint32_t start_count;
     uint32_t temperature_reading;
@@ -91,6 +94,8 @@ void lcd_display(void)
             LcdSendString("  ");
             LcdGoTo(ROW2, COL15);
             LCDSendInt((xTaskGetTickCount()-start_count) / (1000));
-            vTaskDelay(pdMS_TO_TICKS(LCD_PERIOD));
+//            vTaskDelay(pdMS_TO_TICKS(LCD_PERIOD));
+            vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(LCD_PERIOD));
+
     }
 }
