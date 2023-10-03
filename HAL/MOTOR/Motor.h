@@ -1,6 +1,10 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+
+#define ENGINE_POWER    70
+
+
 void MotorInit(void);
 
 void MotorForward(unsigned char percent);
