@@ -26,44 +26,40 @@
 #include "APP/ULTRASONIC_Module/Ultrasonic_Module.h"
 #include "APP/INIT_module/TasksInitiation.h"
 
-
-
 void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
 {
-    while(1);
+    while (1)
+        ;
 }
 
 QueueHandle_t MBXcurrunt_state;
 QueueHandle_t MBXLDR_reading;
 QueueHandle_t MBXReading_differece;
-QueueHandle_t MBXtemperature_reading ;
+QueueHandle_t MBXtemperature_reading;
 QueueHandle_t MBXstart_tick;
-
-
 
 int main(void)
 {
 
-    MBXcurrunt_state=xQueueCreate( 1, sizeof( car_state ) );
-    MBXLDR_reading= xQueueCreate( 1, sizeof( dirType ) );
-    MBXReading_differece= xQueueCreate( 1, sizeof( int32 ) );
-    MBXtemperature_reading = xQueueCreate( 1, sizeof( uint32_t ) );
-    MBXstart_tick= xQueueCreate( 1, sizeof( uint32_t ) );
+    MBXcurrunt_state = xQueueCreate(1, sizeof(car_state));
+    MBXLDR_reading = xQueueCreate(1, sizeof(dirType));
+    MBXReading_differece = xQueueCreate(1, sizeof(int32));
+    MBXtemperature_reading = xQueueCreate(1, sizeof(uint32_t));
+    MBXstart_tick = xQueueCreate(1, sizeof(uint32_t));
 
-    car_state CAR_initial_state =free_running;
+    car_state CAR_initial_state = free_running;
     dirType LDR_initial_direction = STAY;
-    int32_t LDR_initial_Reading_differece = 0 ;
-    uint32_t temperature_initial_reading =0 ;
-    uint32_t start_tick_initial = 0 ;
+    int32_t LDR_initial_Reading_differece = 0;
+    uint32_t temperature_initial_reading = 0;
+    uint32_t start_tick_initial = 0;
 
-    xQueueOverwrite( MBXcurrunt_state, &CAR_initial_state );
-    xQueueOverwrite( MBXLDR_reading, &LDR_initial_direction );
-    xQueueOverwrite( MBXReading_differece, &LDR_initial_Reading_differece );
-    xQueueOverwrite( MBXtemperature_reading , &temperature_initial_reading );
-    xQueueOverwrite( MBXstart_tick, &start_tick_initial );
+    xQueueOverwrite(MBXcurrunt_state, &CAR_initial_state);
+    xQueueOverwrite(MBXLDR_reading, &LDR_initial_direction);
+    xQueueOverwrite(MBXReading_differece, &LDR_initial_Reading_differece);
+    xQueueOverwrite(MBXtemperature_reading, &temperature_initial_reading);
+    xQueueOverwrite(MBXstart_tick, &start_tick_initial);
 
-
-    xTaskCreate((TaskFunction_t)APP_Init,"Initialization", configMINIMAL_STACK_SIZE + 200, NULL, 10, NULL);
+    xTaskCreate((TaskFunction_t)APP_Init, "Initialization", configMINIMAL_STACK_SIZE + 200, NULL, 10, NULL);
     xTaskCreate((TaskFunction_t)avoid_obstacles, "avoid_obstacles", configMINIMAL_STACK_SIZE + 200, NULL, 5, NULL);
     xTaskCreate((TaskFunction_t)lcd_display, "lcd_display", configMINIMAL_STACK_SIZE + 200, NULL, 4, NULL);
     xTaskCreate((TaskFunction_t)ldr_swing_car, "ldr_swing_car", configMINIMAL_STACK_SIZE + 200, NULL, 3, NULL);
@@ -72,7 +68,4 @@ int main(void)
 
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();
-
-
-
 }
