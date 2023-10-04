@@ -18,13 +18,12 @@
 #include "HAL/LDR/LDR.h"
 #include "HAL/LCD/LCD_interface.h"
 #include "HAL/TEMPSENSOR/TempSensor.h"
-#include "APP/APP.h"
+//#include "APP/APP.h"
 // #include "SERVICE/Scheduler.h"
 
 void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
 {
-    while (1)
-        ;
+    while (1);
 }
 
 QueueHandle_t MBXcurrunt_state;
@@ -38,7 +37,7 @@ int main(void)
 
     MBXcurrunt_state = xQueueCreate(1, sizeof(car_state));
     MBXLDR_reading = xQueueCreate(1, sizeof(dirType));
-    MBXReading_differece = xQueueCreate(1, sizeof(int32));
+    MBXReading_differece = xQueueCreate(1, sizeof(int32_t));
     MBXtemperature_reading = xQueueCreate(1, sizeof(uint32_t));
     MBXstart_tick = xQueueCreate(1, sizeof(uint32_t));
 

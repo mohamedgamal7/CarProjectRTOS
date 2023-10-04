@@ -32,7 +32,7 @@ void button_check(void)
             Calibrate();
             isRunning = true;
         }
-        else if((!DIO_Read(PORTF, P4) || ((xTaskGetTickCount() -tick_count) / 1000) >= 60) && isRunning) /* stop */
+        else if((!DIO_Read(PORTF, P4) || ((xTaskGetTickCount() - tick_count) / 1000) >= 60) && isRunning) /* stop */
         {
             while(!DIO_Read(PORTF, P4));
             MotorStop();
