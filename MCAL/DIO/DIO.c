@@ -323,17 +323,17 @@ void DIO_WritePort(Port_Select Port,Read_Write *StructPtr,char Set_Clear){
 int DIO_ReadPin(Port_Select Port,Read_Write *StructPtr,char Bit){
     switch(Port){
     case PORTA:
-        return GET_BIT(GPIO_PORTA_DATA_R,Bit);
+        return Get_Bit(GPIO_PORTA_DATA_R,Bit);
     case PORTB:
-        return GET_BIT(GPIO_PORTB_DATA_R,Bit);
+        return Get_Bit(GPIO_PORTB_DATA_R,Bit);
     case PORTC:
-        return GET_BIT(GPIO_PORTC_DATA_R,Bit);
+        return Get_Bit(GPIO_PORTC_DATA_R,Bit);
     case PORTD:
-        return GET_BIT(GPIO_PORTD_DATA_R,Bit);
+        return Get_Bit(GPIO_PORTD_DATA_R,Bit);
     case PORTE:
-        return GET_BIT(GPIO_PORTE_DATA_R,Bit);
+        return Get_Bit(GPIO_PORTE_DATA_R,Bit);
     case PORTF:
-        return GET_BIT(GPIO_PORTF_DATA_R,Bit);
+        return Get_Bit(GPIO_PORTF_DATA_R,Bit);
     }
 }
 void DIO_ReadPort(Port_Select Port,Read_Write *StructPtr){

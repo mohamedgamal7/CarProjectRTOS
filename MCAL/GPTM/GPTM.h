@@ -1,9 +1,3 @@
-/********************************************************************************************/
-/* Authors: Mohamed Gamal, Ehab Roushdy, Mohamed abelmoteleb, and Aya Yasser                */
-/* Version: V01                                                                             */
-/* Date: 10/09/2023                                                                         */
-/* Description: General-Purpose Timer (GPTM) driver header                                 */
-/********************************************************************************************/
 #ifndef GPTM_H__
 #define GPTM_H__
 

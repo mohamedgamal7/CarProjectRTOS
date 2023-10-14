@@ -1,23 +1,21 @@
-/**
- * @file temp.h
+/*
+ * temp.h
  *
- * @brief Temperature Module Interface
- *
- * This module provides an interface for reading temperature using a temperature sensor.
- *
- * @date Oct 1, 2023
- * @author Mohamed Gamal
+ *  Created on: Oct 1, 2023
+ *      Author: Mohamed_Gamal
  */
 
-#ifndef TEMPERATURE_H_
-#define TEMPERATURE_H_
 
-/**
- * @brief Reads and stores the temperature using a temperature sensor.
- *
- * This function is responsible for reading the temperature using a temperature sensor
- * and may store the temperature reading for further processing.
- */
+
+#ifndef TEMPRATURE_H_
+#define TEMPRATURE_H_
+
+
 void Read_temperature(void);
 
-#endif /* TEMPERATURE_H_ */
+
+
+
+
+
+#endif

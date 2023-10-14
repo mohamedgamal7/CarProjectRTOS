@@ -1,14 +1,7 @@
 #ifndef TYPES_
 #define TYPES_
-
-/**
- * @file types.h
- * @brief This file contains typedefs, enums, unions, and structures for various data types.
- */
-
 #define Port_Num 6
-
-/* TYPEDEF */
+/*                                    TYPEDEF                                      */
 typedef char int8;
 typedef char* int8_ptr;
 typedef unsigned char uint8;
@@ -25,27 +18,22 @@ typedef long int64;
 typedef long* int64_ptr;
 typedef unsigned long uint64;
 typedef unsigned long* uint64_ptr;
-
-/* ENUM */
+/*                                    ENUM                                      */
 typedef enum {
-    PORTA, PORTB, PORTC, PORTD, PORTE, PORTF
-} Port_Select;
-
+    PORTA, PORTB , PORTC, PORTD, PORTE, PORTF
+}Port_Select;
 typedef enum {
     PIN0, PIN1, PIN2, PIN3, PIN4, PIN5, PIN6, PIN7
-} Pin_Select;
-
+}Pin_Select;
 typedef enum {
-    Input, Output = 1
-} Direction;
-
+    Input , Output = 1
+}Direction;
 typedef enum {
-    LOW = 0, HIGH = 1, NOT_WORKING = 2
-} Polarity;
-
-/* UNION */
+    LOW = 0, HIGH = 1, NOT_WORKING=2
+}Polarity;
+/*                                    UNION                                      */
 typedef union {
-    struct {
+    struct{
         unsigned char Pin0:1;
         unsigned char Pin1:1;
         unsigned char Pin2:1;
@@ -56,25 +44,22 @@ typedef union {
         unsigned char Pin7:1;
     };
     unsigned char Pins_Data;
-} Pins_Init;
-
-/* STRUCTURE */
+}Pins_Init;
+/*                                    STRUCTURE                                      */
 typedef struct {
-    Pins_Init Pins;
+    Pins_Init Pins ;
     Pins_Init Pin_DirectionHigh;
     unsigned char PullUp_Down;
     Pins_Init Pull_Up;
     Pins_Init Pull_Down;
-    unsigned char Interrupts_Enable;
+    unsigned char   Interrupts_Enable;
     Pins_Init Level_Detection;
     Pins_Init Both_Edges;
     Pins_Init RisingFalling_Edge;
     Pins_Init Interrupt_Mask;
-} PinConfig;
-
+}PinConfig;
 typedef struct {
     char ReadPORT;
     Pins_Init WritePIN;
-};
-
+}Read_Write;
 #endif

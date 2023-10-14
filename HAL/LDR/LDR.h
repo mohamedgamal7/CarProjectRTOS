@@ -1,24 +1,19 @@
-/********************************************************************************************/
-/* Authors: Mohamed Gamal, Ehab Roushdy, Ahmed Maher and Kareem Hany                        */
-/* Version: V01                                                                             */
-/* Date: 10/09/2023                                                                         */
-/* Description: LDR Driver header                                                           */
-/********************************************************************************************/
 #ifndef LDR_H__
 #define LDR_H__
 
-#include <stdint.h> /* Include the standard integer types. */
+#include <stdint.h>
 
-#include "MCAL/ADC/ADC.h" /* Include the ADC module. */
+#include "MCAL/ADC/ADC.h"
 
-typedef enum {
-    STAY = 0,   /* Enumeration: STAY represents a stationary state. */
-    RIGHT,      /* RIGHT represents a rightward movement. */
-    LEFT        /* LEFT represents a leftward movement. */
-} dirType; /* Define the direction type. */
+typedef enum{
+    STAY = 0,
+    RIGHT,
+    LEFT
+}dirType;
 
-void LDR_Init(void); /* Initialize the LDR module. */
-dirType LDR_Comp(int32 * difference); /* Compare LDR readings and return the direction. */
-void Calibrate(void); /* Calibrate the LDR readings. */
+
+void LDR_Init(void);
+dirType LDR_Comp(int32 * difference);
+void Calibrate (void);
 
 #endif

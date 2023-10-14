@@ -1,9 +1,3 @@
-/********************************************************************************************/
-/* Authors: Mohamed Gamal, Ehab Roushdy, Mohamed abelmoteleb, and Aya Yasser                */
-/* Version: V01                                                                             */
-/* Date: 10/09/2023                                                                         */
-/* Description: General-Purpose Timer (GPTM) driver program                                 */
-/********************************************************************************************/
 #include "GPTM.h"
 
 
@@ -147,6 +141,30 @@ void TimerIntEnable (uint32 TimerIndex, uint32 ui32IntFlags){
 
 void TimerIntNVICEnable(){
     *NVIC_RegPtr[0] |= (1U << 19);
+    /**NVIC_RegPtr[0] |= (1U << 20);
+    *NVIC_RegPtr[0] |= (1U << 21);
+    *NVIC_RegPtr[0] |= (1U << 22);
+    *NVIC_RegPtr[0] |= (1U << 23);
+    *NVIC_RegPtr[0] |= (1U << 24);
+
+    *NVIC_RegPtr[2] |= (1U << 6);
+    *NVIC_RegPtr[2] |= (1U << 7);
+    *NVIC_RegPtr[2] |= (1U << 28);
+    *NVIC_RegPtr[2] |= (1U << 29);
+    *NVIC_RegPtr[2] |= (1U << 30);
+    *NVIC_RegPtr[2] |= (1U << 31);
+
+    *NVIC_RegPtr[3] |= (1U << 0);
+    *NVIC_RegPtr[3] |= (1U << 1);
+    *NVIC_RegPtr[3] |= (1U << 2);
+    *NVIC_RegPtr[3] |= (1U << 3);
+    *NVIC_RegPtr[3] |= (1U << 4);
+    *NVIC_RegPtr[3] |= (1U << 5);
+    *NVIC_RegPtr[3] |= (1U << 6);
+    *NVIC_RegPtr[3] |= (1U << 7);
+    *NVIC_RegPtr[3] |= (1U << 8);
+    *NVIC_RegPtr[3] |= (1U << 9);*/
+
 }
 
 void TimerIntRegister (uint32 TimerIndex, uint32 ui32Timer, void (*pfnHandler)(void)){
@@ -412,3 +430,12 @@ void WTimer5AISR(void){
 void WTimer5BISR(void){
     TimersISR_ptr[23]();
 }
+
+
+
+
+
+
+
+
+
