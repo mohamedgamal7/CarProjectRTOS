@@ -8,15 +8,11 @@
 #include "MCAL/PWM/PWM_interface.h"
 #include "MCAL/PWM/PWM_private.h"
 #include "MCAL/PWM/PWM_config.h"
-//////////////////////////////////////////////////////////////////////////////////////////////
 
 void pwm_init(void)
 {
     /* Enable the PWM clock by writing a value of 0x0010.0000 to the RCGC0 */
     SYSCTL_RCGC0_R |= 0x00100000;
-
-    /* Enable the clock to port B via the RCGC2 */
-//    SYSCTL_RCGC2_R |= 0x00000002;
 
     /* In the GPIO module, enable B6 and B7 pins for their alternate function using the GPIOAFSEL register */
     GPIO_PORTB_AFSEL_R |= 0x000000C0;
