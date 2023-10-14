@@ -1,36 +1,24 @@
-/*
- * Ultrasonic_Module.h
+/**
+ * @file Ultrasonic_Module.h
  *
- *  Created on: Oct 1, 2023
- *      Author: ERoshdy
+ * @brief Ultrasonic Module Interface for Obstacle Avoidance
+ *
+ * This module provides an interface for implementing obstacle avoidance logic in a car
+ * using an ultrasonic sensor. It defines the function for avoiding obstacles.
+ *
+ * @date Oct 1, 2023
+ * @author Aya Yasser
  */
 
 #ifndef APP_ULTRASONIC_MODULE_ULTRASONIC_MODULE_H_
 #define APP_ULTRASONIC_MODULE_ULTRASONIC_MODULE_H_
 
-#include <APP/APP_Config.h>
-#include "LIB/Delay.h"
-#include "MCAL/DIO/DIO.h"
-#include "MCAL/SYSTICK/Systick.h"
-#include "HAL/ULTRASONIC/ULTRASONIC_interface.h"
-#include "HAL/MOTOR/Motor.h"
-#include "HAL/LDR/LDR.h"
-#include "HAL/LCD/LCD_interface.h"
-#include "HAL/TEMPSENSOR/TempSensor.h"
-
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-
-
-
-#define ULTRASONIC_PERIOD       60
-
-
-
-
+/**
+ * @brief Implements obstacle avoidance logic for a car with an ultrasonic sensor.
+ *
+ * This function continuously monitors the car's current state and controls its movement
+ * to avoid obstacles based on ultrasonic sensor readings.
+ */
 void avoid_obstacles(void);
-
-
 
 #endif /* APP_ULTRASONIC_MODULE_ULTRASONIC_MODULE_H_ */
