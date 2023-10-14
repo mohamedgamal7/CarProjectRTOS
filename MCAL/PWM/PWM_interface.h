@@ -7,10 +7,12 @@
 
 #pragma once
 
-/*different PWM modules definitions*/
+////////////////////////////           MACROS           //////////////////////////////////////
 #define PWM0                0
 #define PWM1                1
+////////////////////////////          VARIABLES         //////////////////////////////////////
 
-/*Function prototypes*/
+////////////////////////////          FUNCTIONS         //////////////////////////////////////
+
 void pwm_init(void);
 void pwm_set_duty_cycle(unsigned char percent);

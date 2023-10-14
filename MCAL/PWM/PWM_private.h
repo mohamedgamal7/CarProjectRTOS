@@ -7,8 +7,7 @@
 
 #pragma once
 
-/*Register definitions*/
-
+////////////////////////////           MACROS           //////////////////////////////////////
 #define SYSCTL_RCGC0_R          (*((volatile unsigned long *)0x400FE100))
 #define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
 
@@ -29,5 +28,7 @@
 #define PWM0_ENABLE_R           (*((volatile unsigned long *)0x40028008))
 
 
+////////////////////////////          VARIABLES         //////////////////////////////////////
 
+////////////////////////////          FUNCTIONS         //////////////////////////////////////
 
