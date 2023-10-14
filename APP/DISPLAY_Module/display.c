@@ -51,13 +51,13 @@ void lcd_display_const_string(void)
 void lcd_display(void)
 {
     TickType_t xLastWakeTime = xTaskGetTickCount();
-    lcd_display_const_string();
     uint32_t start_count;
     uint32_t temperature_reading;
     car_state current_state;
     dirType LDR_direction;
     int32_t Reading_differece;
 
+    lcd_display_const_string();
     while(1)
     {
         xLastWakeTime = xTaskGetTickCount();
