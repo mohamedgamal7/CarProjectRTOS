@@ -34,6 +34,7 @@ static void NmiSR(void);
 static void FaultISR(void);
 static void IntDefaultHandler(void);
 extern void PortF_ISR(void);
+void CanHandler(void);
 
 void Timer0AISR(void);
 void Timer0BISR(void);
@@ -80,7 +81,6 @@ extern uint32_t __STACK_TOP;
 // External declarations for the interrupt handlers used by the application.
 //
 //*****************************************************************************
-// To be added by user
 // To be added by user
 extern void vPortSVCHandler(void);
 extern void xPortPendSVHandler(void);
@@ -152,7 +152,7 @@ void (* const g_pfnVectors[])(void) =
     Timer3BISR,                      // Timer 3 subtimer B
     IntDefaultHandler,                      // I2C1 Master and Slave
     IntDefaultHandler,                      // Quadrature Encoder 1
-    IntDefaultHandler,                      // CAN0
+    CanHandler,                      // CAN0
     IntDefaultHandler,                      // CAN1
     0,                                      // Reserved
     0,                                      // Reserved

@@ -4,8 +4,10 @@
 #include <stdbool.h>
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
+#include "inc/hw_can.h"
 #include "driverlib/gpio.h"
 #include "driverlib/sysctl.h"
+#include "driverlib/can.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -18,8 +20,31 @@
 #include "HAL/LDR/LDR.h"
 #include "HAL/LCD/LCD_interface.h"
 #include "HAL/TEMPSENSOR/TempSensor.h"
-//#include "APP/APP.h"
-// #include "SERVICE/Scheduler.h"
+
+#include "APP/LDR_Module/ldr_module.h"
+#include "APP/BUTTONS_Module/Buttons.h"
+#include "App/TEMP_Module/temperature.h"
+#include "APP/DISPLAY_Module/display.h"
+#include "APP/ULTRASONIC_Module/Ultrasonic_Module.h"
+#include "APP/INIT_module/TasksInitiation.h"
+
+
+void CanHandler(void)
+{
+    uint32_t Status;
+    Status = CANIntStatus(CAN0_BASE, CAN_INT_STS_CAUSE);
+
+    if(Status == CAN_INT_INTID_STATUS)
+    {
+        Status = CANStatusGet(CAN0_BASE, CAN_STS_CONTROL);
+    }
+    else if(Status == 1)
+    {
+        CANIntClear(CAN0_BASE, Status);
+        SysCtlReset();
+    }
+}
+
 
 void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
 {

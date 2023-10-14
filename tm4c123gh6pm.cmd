@@ -10,7 +10,7 @@
 
 MEMORY
 {
-    FLASH (RX) : origin = 0x0001A800, length = 0x00040000 - 0x0001A800
+    FLASH (RX) : origin = 0, length = 0x00040000 - 0
     SRAM (RWX) : origin = 0x20000000, length = 0x00008000
 }
 
@@ -28,7 +28,7 @@ MEMORY
 
 SECTIONS
 {
-    .intvecs:   > 0x0001A800
+    .intvecs:   > 0
     .text   :   > FLASH
     .const  :   > FLASH
     .cinit  :   > FLASH
