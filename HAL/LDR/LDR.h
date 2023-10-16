@@ -2,18 +2,22 @@
 #define LDR_H__
 
 #include <stdint.h>
-
 #include "MCAL/ADC/ADC.h"
 
-typedef enum{
+// Enum for the direction
+typedef enum {
     STAY = 0,
     RIGHT,
     LEFT
-}dirType;
+} dirType;
 
-
+// Function to initialize LDR
 void LDR_Init(void);
-dirType LDR_Comp(int32 * difference);
-void Calibrate (void);
+
+// Function to compare LDR readings and determine direction
+dirType LDR_Comp(int32 *difference);
+
+// Function to calibrate the LDR
+void Calibrate(void);
 
 #endif

@@ -1,10 +1,20 @@
 /*
-  Author:      Ehab Roshdy                                                                      
-  Version:     0.1                                                                       
-  Date:        21/8/2023                                                                             
-  Description: LCD driver interface file      
-*/
+  Author:      Ehab Roshdy
+  Version:     0.1
+  Date:        21/8/2023
+  Description: LCD driver interface file
 
+  This code serves as the interface file for an LCD driver. It defines constants for various
+  LCD commands, including display control, function set, and entry mode set. It also provides
+  function prototypes for initializing the LCD module, sending commands and data, displaying
+  strings, positioning the cursor, saving custom characters, and sending integers to the LCD.
+
+  You can use this interface to communicate with and control an LCD module with a compatible
+  driver. By implementing the provided functions, you can display text and custom characters
+  on the LCD screen.
+
+  Note: The actual implementation of these functions would be in the corresponding .c file.
+*/
 #pragma once
 
 #define CLEAR_DISPLAY       0X01
@@ -37,9 +47,6 @@
 #define SHIFT_DISPLAY_LEFT  0X18
 #define SHIFT_DISPLAY_RIGHT 0X1C
 
-
-
-
 /* Rows for goTo function */
 #define ROW1                0x00
 #define ROW2                0x01
@@ -62,39 +69,23 @@
 #define COL15               0x0E
 #define COL16               0x0F
 
-
 // Function prototype for initializing the LCD module
-// Initializes the LCD module with specified configuration.
-// Arguments:
-//   dataPort: Data port for the LCD module.
-//   dataPins: Data pins connected to the LCD module.
-//   rsPort: Port where the Register Select (RS) pin is connected.
-//   rsPin: Specific pin number of the RS pin.
-//   enPort: Port where the Enable (EN) pin is connected.
-//   enPin: Specific pin number of the EN pin.
 void LcdInit();
 
 // Function prototype for sending a command to the LCD module
-// Sends a command to configure the LCD module.
-// Argument:
-//   c: Command to be sent to the LCD module.
 void LcdSendCommand(char c);
 
 // Function prototype for sending data to the LCD module
-// Sends character data to be displayed on the LCD screen.
-// Argument:
-//   c: Character data to be sent to the LCD module.
 void LcdSendData(char c);
 
 // Function prototype for sending a string to the LCD module
-// Sends a sequence of characters (a string) to be displayed on the LCD screen.
-// Argument:
-//   str: Pointer to a char array (string) containing the data to be sent.
 void LcdSendString(char* str);
 
-
+// Function prototype for positioning the cursor on the LCD
 void LcdGoTo(unsigned char row, unsigned char col);
 
+// Function prototype for saving custom characters to the LCD
 void LcdSaveCustomChar(unsigned char c[8], unsigned char ID);
 
+// Function prototype for sending an integer to the LCD
 void LCDSendInt(int num);

@@ -5,17 +5,10 @@
  *      Author: Mohamed_Gamal
  */
 
+#ifndef TEMPERATURE_H_
+#define TEMPERATURE_H_
 
-
-#ifndef TEMPRATURE_H_
-#define TEMPRATURE_H_
-
-
+// Function prototype for reading temperature
 void Read_temperature(void);
-
-
-
-
-
 
 #endif

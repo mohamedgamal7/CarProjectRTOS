@@ -10,7 +10,7 @@
 
 MEMORY
 {
-    FLASH (RX) : origin = 0, length = 0x00040000 - 0
+    FLASH (RX) : origin = 0, length = 0x00040000 - 0/*0x0001A800*/
     SRAM (RWX) : origin = 0x20000000, length = 0x00008000
 }
 

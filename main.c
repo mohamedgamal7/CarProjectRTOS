@@ -28,29 +28,30 @@
 #include "APP/ULTRASONIC_Module/Ultrasonic_Module.h"
 #include "APP/INIT_module/TasksInitiation.h"
 
-
+// Function to handle CAN interrupts
 void CanHandler(void)
 {
     uint32_t Status;
     Status = CANIntStatus(CAN0_BASE, CAN_INT_STS_CAUSE);
 
-    if(Status == CAN_INT_INTID_STATUS)
+    if (Status == CAN_INT_INTID_STATUS)
     {
         Status = CANStatusGet(CAN0_BASE, CAN_STS_CONTROL);
     }
-    else if(Status == 1)
+    else if (Status == 1)
     {
         CANIntClear(CAN0_BASE, Status);
         SysCtlReset();
     }
 }
 
-
+// Function to handle stack overflow
 void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
 {
     while (1);
 }
 
+// Define queues for inter-task communication
 QueueHandle_t MBXcurrunt_state;
 QueueHandle_t MBXLDR_reading;
 QueueHandle_t MBXReading_differece;
@@ -59,31 +60,41 @@ QueueHandle_t MBXstart_tick;
 
 int main(void)
 {
-
+    // Create queues for inter-task communication
     MBXcurrunt_state = xQueueCreate(1, sizeof(car_state));
     MBXLDR_reading = xQueueCreate(1, sizeof(dirType));
     MBXReading_differece = xQueueCreate(1, sizeof(int32_t));
     MBXtemperature_reading = xQueueCreate(1, sizeof(uint32_t));
     MBXstart_tick = xQueueCreate(1, sizeof(uint32_t));
 
+    // Initialize initial values for state, direction, etc.
     car_state CAR_initial_state = free_running;
     dirType LDR_initial_direction = STAY;
     int32_t LDR_initial_Reading_differece = 0;
     uint32_t temperature_initial_reading = 0;
     uint32_t start_tick_initial = 0;
 
+    // Overwrite the queues with initial values
     xQueueOverwrite(MBXcurrunt_state, &CAR_initial_state);
     xQueueOverwrite(MBXLDR_reading, &LDR_initial_direction);
     xQueueOverwrite(MBXReading_differece, &LDR_initial_Reading_differece);
     xQueueOverwrite(MBXtemperature_reading, &temperature_initial_reading);
     xQueueOverwrite(MBXstart_tick, &start_tick_initial);
 
+    // Create tasks for different functionalities
+
+    // Task for initialization
     xTaskCreate((TaskFunction_t)APP_Init, "Initialization", configMINIMAL_STACK_SIZE + 200, NULL, 10, NULL);
+    // Task for obstacle avoidance
     xTaskCreate((TaskFunction_t)avoid_obstacles, "avoid_obstacles", configMINIMAL_STACK_SIZE + 200, NULL, 5, NULL);
+    // Task for LCD display
     xTaskCreate((TaskFunction_t)lcd_display, "lcd_display", configMINIMAL_STACK_SIZE + 200, NULL, 4, NULL);
+    // Task for LDR-based car swing control
     xTaskCreate((TaskFunction_t)ldr_swing_car, "ldr_swing_car", configMINIMAL_STACK_SIZE + 200, NULL, 3, NULL);
+    // Task for button check
     xTaskCreate((TaskFunction_t)button_check, "button_check", configMINIMAL_STACK_SIZE + 200, NULL, 2, NULL);
-    xTaskCreate((TaskFunction_t)Read_temperature, "Read_temprature", configMINIMAL_STACK_SIZE + 200, NULL, 1, NULL);
+    // Task for reading temperature
+    xTaskCreate((TaskFunction_t)Read_temperature, "Read_temperature", configMINIMAL_STACK_SIZE + 200, NULL, 1, NULL);
 
     // Start the FreeRTOS scheduler
     vTaskStartScheduler();

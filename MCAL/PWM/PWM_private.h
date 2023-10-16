@@ -9,7 +9,7 @@
 
 ////////////////////////////           MACROS           //////////////////////////////////////
 #define SYSCTL_RCGC0_R          (*((volatile unsigned long *)0x400FE100))
-#define SYSCTL_RCGC2_R          (*((volatile unsigned long *)0x400FE108))
+#define SYSCTL_RCGCPWM_R        (*((volatile unsigned long *)0x400FE640))
 
 #define GPIO_PORTB_AFSEL_R      (*((volatile unsigned long *)0x40005420))
 #define GPIO_PORTB_PCTL_R       (*((volatile unsigned long *)0x4000552C))
