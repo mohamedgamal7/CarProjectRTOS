@@ -5,9 +5,10 @@
 #include <stdint.h>
 #include "MCAL/ADC/ADC.h"
 
+/* Function to initialize the temperature sensor */
 void TempInit(void);
+
+/* Function to read the temperature value from the sensor */
 unsigned int TempRead(void);
-
-
 
 #endif

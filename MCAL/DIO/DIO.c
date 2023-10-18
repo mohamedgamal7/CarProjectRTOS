@@ -33,9 +33,9 @@ void PORT_Init (Port_Select Port,PinConfig *StructPtr)
     case PORTB:
         SYSCTL_RCGCGPIO_R|=PORTB_CC;
         while ((SYSCTL_PRGPIO_R&PORTB_CC)==0);
-        GPIO_PORTB_LOCK_R=0X4C4F434B;
-        GPIO_PORTB_CR_R=StructPtr->Pins.Pins_Data;
-        GPIO_PORTB_DIR_R= StructPtr->Pin_DirectionHigh.Pins_Data;
+        GPIO_PORTB_LOCK_R|=0X4C4F434B;
+        GPIO_PORTB_CR_R|=StructPtr->Pins.Pins_Data;
+        GPIO_PORTB_DIR_R|= StructPtr->Pin_DirectionHigh.Pins_Data;
         break;
     case PORTC:
         SYSCTL_RCGCGPIO_R|=PORTC_CC;
@@ -103,7 +103,7 @@ void PORT_Init (Port_Select Port,PinConfig *StructPtr)
             GPIO_PORTA_PDR_R= StructPtr->Pull_Down.Pins_Data;  //PULL-DOWN INPUTS
             break;
         case PORTB:
-            GPIO_PORTB_PDR_R=  StructPtr->Pull_Down.Pins_Data;  //PULL-DOWN INPUTS
+            GPIO_PORTB_PDR_R|=  StructPtr->Pull_Down.Pins_Data;  //PULL-DOWN INPUTS
             break;
         case PORTC:
             GPIO_PORTC_PDR_R=  StructPtr->Pull_Down.Pins_Data;  //PULL-DOWN INPUTS
@@ -123,7 +123,7 @@ void PORT_Init (Port_Select Port,PinConfig *StructPtr)
         GPIO_PORTA_DEN_R = StructPtr->Pins.Pins_Data; //ENABLING THE USED PINS
         break;
     case PORTB:
-        GPIO_PORTB_DEN_R=  StructPtr->Pins.Pins_Data;  //ENABLING THE USED PINS
+        GPIO_PORTB_DEN_R|=  StructPtr->Pins.Pins_Data;  //ENABLING THE USED PINS
         break;
     case PORTC:
         GPIO_PORTC_DEN_R=  StructPtr->Pins.Pins_Data;  //ENABLING THE USED PINS
@@ -155,12 +155,12 @@ void GPIO_InterruptInit(Port_Select Port,PinConfig *StructPtr){
             NVIC_EN0_R=1<<0; /*ALLOWS INTERRUPTS IN GENERAL FOR PORTA*/
             break;
         case PORTB:
-            GPIO_PORTB_IM_R = 0x00;  /*0: PREVENT INTERRUPTS     1: ALLOW INTERRUPTS*/
-            GPIO_PORTB_IS_R= StructPtr->Level_Detection.Pins_Data;    //EDGE DETECTION
-            GPIO_PORTB_IBE_R=StructPtr->Both_Edges.Pins_Data;         //GPIO Interrupt Event
-            GPIO_PORTB_IEV_R=StructPtr->RisingFalling_Edge.Pins_Data;  // FALLING EDGE
-            GPIO_PORTB_IM_R = StructPtr->Interrupt_Mask.Pins_Data;   /*********INTERRUPT MASKING************/
-            NVIC_EN0_R=1<<1; /*ALLOWS INTERRUPTS IN GENERAL FOR PORTB*/
+            GPIO_PORTB_IM_R |= 0x00;  /*0: PREVENT INTERRUPTS     1: ALLOW INTERRUPTS*/
+            GPIO_PORTB_IS_R |= StructPtr->Level_Detection.Pins_Data;    //EDGE DETECTION
+            GPIO_PORTB_IBE_R|=StructPtr->Both_Edges.Pins_Data;         //GPIO Interrupt Event
+            GPIO_PORTB_IEV_R|=StructPtr->RisingFalling_Edge.Pins_Data;  // FALLING EDGE
+            GPIO_PORTB_IM_R |= StructPtr->Interrupt_Mask.Pins_Data;   /*********INTERRUPT MASKING************/
+            NVIC_EN0_R|=1<<1; /*ALLOWS INTERRUPTS IN GENERAL FOR PORTB*/
             break;
         case PORTC:
             GPIO_PORTC_IM_R = 0x00;  /*0: PREVENT INTERRUPTS     1: ALLOW INTERRUPTS*/
@@ -229,25 +229,25 @@ void alt_Function(uint8 Port,uint8 pin, uint8 pinmux)
 /*****************************************************************/
 void analog_Mode(Port_Select Port,uint8 Pins){
     switch (Port)
-      {
-      case PORTA:
-          GPIO_PORTA_AMSEL_R|=(Pins) ; //ENABLING THE USED PINS
-          break;
-      case PORTB:
-          GPIO_PORTB_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
-          break;
-      case PORTC:
-          GPIO_PORTC_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
-          break;
-      case PORTD:
-          GPIO_PORTD_AMSEL_R |=(Pins) ;//ENABLING THE USED PINS
-          break;
-      case PORTE:
-          GPIO_PORTE_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
-          break;
-      case PORTF:
-          GPIO_PORTF_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
-      }
+    {
+    case PORTA:
+        GPIO_PORTA_AMSEL_R|=(Pins) ; //ENABLING THE USED PINS
+        break;
+    case PORTB:
+        GPIO_PORTB_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
+        break;
+    case PORTC:
+        GPIO_PORTC_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
+        break;
+    case PORTD:
+        GPIO_PORTD_AMSEL_R |=(Pins) ;//ENABLING THE USED PINS
+        break;
+    case PORTE:
+        GPIO_PORTE_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
+        break;
+    case PORTF:
+        GPIO_PORTF_AMSEL_R |=(Pins) ;  //ENABLING THE USED PINS
+    }
 }
 /*****************************************************************/
 void DIO_WritePin(Port_Select Port,Read_Write *StructPtr)
@@ -323,18 +323,19 @@ void DIO_WritePort(Port_Select Port,Read_Write *StructPtr,char Set_Clear){
 int DIO_ReadPin(Port_Select Port,Read_Write *StructPtr,char Bit){
     switch(Port){
     case PORTA:
-        return Get_Bit(GPIO_PORTA_DATA_R,Bit);
+        return GET_BIT(GPIO_PORTA_DATA_R,Bit);
     case PORTB:
-        return Get_Bit(GPIO_PORTB_DATA_R,Bit);
+        return GET_BIT(GPIO_PORTB_DATA_R,Bit);
     case PORTC:
-        return Get_Bit(GPIO_PORTC_DATA_R,Bit);
+        return GET_BIT(GPIO_PORTC_DATA_R,Bit);
     case PORTD:
-        return Get_Bit(GPIO_PORTD_DATA_R,Bit);
+        return GET_BIT(GPIO_PORTD_DATA_R,Bit);
     case PORTE:
-        return Get_Bit(GPIO_PORTE_DATA_R,Bit);
+        return GET_BIT(GPIO_PORTE_DATA_R,Bit);
     case PORTF:
-        return Get_Bit(GPIO_PORTF_DATA_R,Bit);
+        return GET_BIT(GPIO_PORTF_DATA_R,Bit);
     }
+    return 0;
 }
 void DIO_ReadPort(Port_Select Port,Read_Write *StructPtr){
     switch(Port){
@@ -362,7 +363,7 @@ void DIO_ReadPort(Port_Select Port,Read_Write *StructPtr){
 void DIO_Write(uint8 CpyPort_ID, uint8 CpyPinMask, uint8 CpyValue)
 {
     // use bit banding to write directly the value on the PORT
-     ((volatile unsigned long *)GPIO_PORT_ADDRESS(NO_OFFSET))[CpyPinMask] = CpyValue;
+    ((volatile unsigned long *)GPIO_PORT_ADDRESS(NO_OFFSET))[CpyPinMask] = CpyValue;
 }
 
 uint8 DIO_Read(uint8 CpyPort_ID, uint8 CpyPinMask)
@@ -377,24 +378,24 @@ void DIO_Set_Pullup(uint8 Cpy_Port,uint8 Cpy_PinMask)
     if(Cpy_Port<6)
     {
         switch(Cpy_Port){
-          case PORTA:
-              GPIO_PORTA_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
-              break;
-          case PORTB:
-              GPIO_PORTB_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
-              break;
-          case PORTC:
-              GPIO_PORTC_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
-              break;
-          case PORTD:
-              GPIO_PORTD_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
-              break;
-          case PORTE:
-              GPIO_PORTE_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
-              break;
-          case PORTF:
-              GPIO_PORTF_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
-          }
+        case PORTA:
+            GPIO_PORTA_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
+            break;
+        case PORTB:
+            GPIO_PORTB_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
+            break;
+        case PORTC:
+            GPIO_PORTC_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
+            break;
+        case PORTD:
+            GPIO_PORTD_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
+            break;
+        case PORTE:
+            GPIO_PORTE_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
+            break;
+        case PORTF:
+            GPIO_PORTF_PUR_R|= Cpy_PinMask;  //PULL-UP INPUTS
+        }
     }
 }
 

@@ -1,15 +1,17 @@
 #include "Delay.h"
 
-
-void delay_ms(int m){
+// Function to create a delay in milliseconds
+void delay_ms(int milliseconds) {
     int i, j;
-    for(i = 0; i < m; i++){
-        for(j = 0; j < 3180; j++);
+    for (i = 0; i < milliseconds; i++) {
+        for (j = 0; j < 3180; j++);
     }
 }
-void delay_us(int m){
+
+// Function to create a delay in microseconds
+void delay_us(int microseconds) {
     int i, j;
-    for(i = 0; i < m; i++){
-        for(j = 0; j < 3; j++);
+    for (i = 0; i < microseconds; i++) {
+        for (j = 0; j < 3; j++);
     }
 }

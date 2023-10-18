@@ -8,10 +8,7 @@
 #ifndef APP_LDR_MODULE_H_
 #define APP_LDR_MODULE_H_
 
-#define LDR_PERIOD              100
-
-
+// Function prototype for an LDR module related function
 void ldr_swing_car(void);
-
 
 #endif /* APP_LDR_MODULE_H_ */
