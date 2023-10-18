@@ -97,19 +97,19 @@ Contributions to this project are welcomed and appreciated! If you find bugs or 
 
 1. **Fork the Repository:**
 
-Fork the repository to your GitHub account.
+   Fork the repository to your GitHub account.
 
 2. **Create a Feature Branch:**
 
-Create a feature branch for your changes.
+   Create a feature branch for your changes.
 
 3. **Make Improvements:**
 
-Implement your improvements or add new features.
+   Implement your improvements or add new features.
 
 4. **Submit a Pull Request:**
 
-Submit a pull request for review and potential inclusion.
+   Submit a pull request for review and potential inclusion.
 
 ## Acknowledgments
 
