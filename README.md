@@ -9,7 +9,6 @@
 - [Contributing](#contributing)
 - [Acknowledgments](#acknowledgments)
 - [Contact](#contact)
-- [License](#license)
 
 ## Project Overview
 
