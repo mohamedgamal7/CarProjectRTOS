@@ -10,12 +10,6 @@
 
 
 
-
-
-
-
-
-
 void avoid_obstacles(void);
 
 

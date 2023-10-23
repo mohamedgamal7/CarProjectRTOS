@@ -39,27 +39,9 @@ void ldr_swing_car(void)
                 xQueueOverwrite( MBXReading_differece, &Reading_differece);
                 xQueueOverwrite( MBXLDR_reading, &LDR_direction);
 
-                switch (LDR_direction)
-                {
-                    case RIGHT:
-                    {
-                        MotorTurnRight(ENGINE_POWER);
-                        break;
-                    }
-                    case LEFT:
-                    {
-                        MotorTurnLeft(ENGINE_POWER);
-                        break;
-                    }
-                    default:
-                    {
-                        MotorForward(ENGINE_POWER);
-                        break;
-                    }
-                }
+
             }
             vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(LDR_PERIOD));
-//        vTaskDelay(pdMS_TO_TICKS(LDR_PERIOD));
     }
 }
 

@@ -53,7 +53,6 @@ void lcd_display(void)
             xQueuePeek( MBXcurrunt_state, &current_state, 0);
             xQueuePeek( MBXtemperature_reading, &temperature_reading, 0);
             xQueuePeek( MBXLDR_reading, &LDR_direction, 0);
-            xQueuePeek( MBXLDR_reading, &LDR_direction, 0);
             xQueuePeek( MBXReading_differece, &Reading_differece, 0);
 
             LcdGoTo(ROW1, COL6);
@@ -93,7 +92,6 @@ void lcd_display(void)
             LcdSendString("  ");
             LcdGoTo(ROW2, COL15);
             LCDSendInt((xTaskGetTickCount()-start_count) / (1000));
-//            vTaskDelay(pdMS_TO_TICKS(LCD_PERIOD));
             vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(LCD_PERIOD));
 
     }

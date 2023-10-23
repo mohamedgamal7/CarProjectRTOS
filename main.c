@@ -24,6 +24,7 @@
 #include "App/TEMP_Module/temperature.h"
 #include "APP/DISPLAY_Module/display.h"
 #include "APP/ULTRASONIC_Module/Ultrasonic_Module.h"
+#include "APP/STEERING_Module/Steering.h"
 #include "APP/INIT_module/TasksInitiation.h"
 
 void vApplicationStackOverflowHook(xTaskHandle *pxTask, signed char *pcTaskName)
@@ -60,7 +61,8 @@ int main(void)
     xQueueOverwrite(MBXstart_tick, &start_tick_initial);
 
     xTaskCreate((TaskFunction_t)APP_Init, "Initialization", configMINIMAL_STACK_SIZE + 200, NULL, 10, NULL);
-    xTaskCreate((TaskFunction_t)avoid_obstacles, "avoid_obstacles", configMINIMAL_STACK_SIZE + 200, NULL, 5, NULL);
+    xTaskCreate((TaskFunction_t)avoid_obstacles, "avoid_obstacles", configMINIMAL_STACK_SIZE + 200, NULL, 6, NULL);
+    xTaskCreate((TaskFunction_t)SteerControl, "SteerControl", configMINIMAL_STACK_SIZE + 200, NULL, 5, NULL);
     xTaskCreate((TaskFunction_t)lcd_display, "lcd_display", configMINIMAL_STACK_SIZE + 200, NULL, 4, NULL);
     xTaskCreate((TaskFunction_t)ldr_swing_car, "ldr_swing_car", configMINIMAL_STACK_SIZE + 200, NULL, 3, NULL);
     xTaskCreate((TaskFunction_t)button_check, "button_check", configMINIMAL_STACK_SIZE + 200, NULL, 2, NULL);

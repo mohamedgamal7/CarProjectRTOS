@@ -38,15 +38,10 @@ void avoid_obstacles(void)
                     distance = Measure_Distance();
                     if(distance > 20 || distance < 0)
                     {
-                        MotorTurnRight(ENGINE_POWER);
                         current_state = blocked_turning;
                         xQueueOverwrite( MBXcurrunt_state, &current_state );
                     }
-                    else
-                    {
-                        current_state = blocked_reverse;
-                        xQueueOverwrite( MBXcurrunt_state, &current_state );
-                    }
+
 
                     break;
                 }
@@ -68,13 +63,8 @@ void avoid_obstacles(void)
                     {
                         current_state = blocked_reverse;
                         xQueueOverwrite( MBXcurrunt_state, &current_state );
-                        MotorBackward(ENGINE_POWER);
                     }
-                    else
-                    {
-                        current_state = free_running;
-                        xQueueOverwrite( MBXcurrunt_state, &current_state );
-                    }
+
                     break;
                 }
             }
